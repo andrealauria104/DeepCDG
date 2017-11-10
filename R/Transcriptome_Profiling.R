@@ -6,7 +6,7 @@ args <- commandArgs(trailingOnly = T)
 parserr <- 'Incorrect argument parsing. Please specify: \n
 1 - TCGA project (Cancer type). \n
 2 - Data directory. \n
-3 - Format for storing prepared data (if needed). \n '
+3 - Format for storing prepared data (if needed: Rdata, csv or both) \n '
 
 if(length(args)<2){
   stop(message(parserr))
@@ -37,7 +37,7 @@ query.exp.hg38 <- GDCquery( project = cancer_type
                                  ,workflow.type = "HTSeq - FPKM"
                                  ,legacy = FALSE)
 
-GDC = paste0(dir,"GDCdata")
+GDC = paste0(dir,"/GDCdata")
 dir.create(GDC, recursive = T)
 
 tryCatch(GDCdownload(query.exp.hg38, directory=GDC), error = function(e) GDCdownload(query.exp.hg38, method = "client", directory=GDC))
@@ -56,13 +56,13 @@ if(format!='none'){
   
   if(format=="Rdata" | both==T){
     # 1.3 Save Rdata
-    Rdata_dir = paste0(dir,"Rdata")
+    Rdata_dir = paste0(dir,"/Rdata")
     dir.create(Rdata_dir, recursive = T)
     
     save(FPKM, file = paste0(Rdata_dir,"/",cancer_type,"_Transcriptome_Profiling.Rdata"))
   } else if(format=="csv" | both==T){
     # 1.3 Save CSV
-    Rdata_dir = paste0(dir,"CSV")
+    Rdata_dir = paste0(dir,"/CSV")
     dir.create(Rdata_dir, recursive = T)
     
     write.csv2(FPKM, file = paste0(Rdata_dir,"/",cancer_type,"_Transcriptome_Profiling.csv"))
