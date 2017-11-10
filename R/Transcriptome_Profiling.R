@@ -60,25 +60,36 @@ if(format!='none'){
     both=T
   }
   
-  if(format=="Rdata" | both==T){
-    # 1.3 Save Rdata
-    Rdata_dir = paste0(dir,"/Rdata")
-    dir.create(Rdata_dir, recursive = T)
-    
-    cat("Saving expression data as .Rdata \n")
-    save(FPKM, file = paste0(Rdata_dir,"/",cancer_type,"_Transcriptome_Profiling.Rdata"))
-  } else if(format=="csv" | both==T){
-    # 1.3 Save CSV
-    Rdata_dir = paste0(dir,"/CSV")
-    dir.create(Rdata_dir, recursive = T)
-    
-    cat("Saving expression data as .csv \n")
-    write.csv2(FPKM, file = paste0(Rdata_dir,"/",cancer_type,"_Transcriptome_Profiling.csv"))
-  } else{
-    stop(message("Invalid format for storing prepared data."))
+  i=1
+  j=0
+  while(i==1 & j<2){
+    i=0
+    if(format=="Rdata" | both==T){
+      # 1.3 Save Rdata
+      Rdata_dir = paste0(dir,"/Rdata")
+      dir.create(Rdata_dir, recursive = T)
+      
+      cat("Saving expression data as .Rdata \n")
+      save(FPKM, file = paste0(Rdata_dir,"/",cancer_type,"_Transcriptome_Profiling.Rdata"))
+    } else if(format=="csv"){
+      # 1.3 Save CSV
+      Rdata_dir = paste0(dir,"/CSV")
+      dir.create(Rdata_dir, recursive = T)
+      
+      cat("Saving expression data as .csv \n")
+      write.csv2(FPKM, file = paste0(Rdata_dir,"/",cancer_type,"_Transcriptome_Profiling.csv"))
+    } else{
+      stop(message("Invalid format for storing prepared data."))
+    }
+    if(both){
+      i=1
+      format="csv"
+    }
+    j=j+1
   }
-  
 }
+  
+
 
 
 
