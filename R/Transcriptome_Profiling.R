@@ -22,6 +22,13 @@ if(length(args)<3){
   format = as.character(args[3])
 }
 
+# Directory control
+dir1 = dirname(dir)
+dir2 = basename(dir)
+
+dir = paste0(dir1, dir2)
+rm(list=c("dir1","dir2"))
+
 # 0.2 Resources ====
 
 library(TCGAbiolinks)
