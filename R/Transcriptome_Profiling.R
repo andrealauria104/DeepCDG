@@ -25,8 +25,7 @@ if(length(args)<3){
 # Directory control
 dir1 = dirname(dir)
 dir2 = basename(dir)
-
-dir = paste0(dir1, dir2)
+dir = paste0(dir1,"/",dir2)
 rm(list=c("dir1","dir2"))
 
 # 0.2 Resources ====
@@ -50,8 +49,8 @@ dir.create(GDC, recursive = T)
 tryCatch(GDCdownload(query.exp.hg38, directory=GDC), error = function(e) GDCdownload(query.exp.hg38, method = "client", directory=GDC))
 
 if(format!='none'){
-  
   # 1.2 Prepare Data 
+  cat("Preparing data ... \n")
   FPKM <- GDCprepare(query.exp.hg38, directory=GDC)
   FPKM <- assay(FPKM, "HTSeq - FPKM" )
   FPKM <- melt(FPKM, varnames = c("ensembl_gene_id","Tumor_Sample_Barcode"))
@@ -68,13 +67,15 @@ if(format!='none'){
     
     cat("Saving expression data as .Rdata \n")
     save(FPKM, file = paste0(Rdata_dir,"/",cancer_type,"_Transcriptome_Profiling.Rdata"))
-  } else if(format=="csv" | both==T){
+  } if(format=="csv" | both==T){
     # 1.3 Save CSV
     Rdata_dir = paste0(dir,"/CSV")
     dir.create(Rdata_dir, recursive = T)
     
     cat("Saving expression data as .csv \n")
     write.csv2(FPKM, file = paste0(Rdata_dir,"/",cancer_type,"_Transcriptome_Profiling.csv"))
+  } else{
+    stop(message("Invalid format for storing prepared data."))
   }
   
 }
