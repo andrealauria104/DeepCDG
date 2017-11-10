@@ -67,7 +67,7 @@ if(format!='none'){
     
     cat("Saving expression data as .Rdata \n")
     save(FPKM, file = paste0(Rdata_dir,"/",cancer_type,"_Transcriptome_Profiling.Rdata"))
-  } if(format=="csv" | both==T){
+  } else if(format=="csv" | both==T){
     # 1.3 Save CSV
     Rdata_dir = paste0(dir,"/CSV")
     dir.create(Rdata_dir, recursive = T)
