@@ -1,5 +1,9 @@
 # R script to download and prepare mutation data (MAF) using TCGAbiolinks
 source("R/Utils.R")
+if(!dir.exists("DownloadEnv")){
+  cat("Creating download environment ... \n ")
+  dir.create("DownloadEnv")
+}
 setwd("DownloadEnv")
 
 # 1.0 Download MAF - 4 different pipelines ====
