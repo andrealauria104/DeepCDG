@@ -12,6 +12,9 @@ query_met.hg38 <- GDCquery(project = cancer_type
                               , platform = "Illumina Human Methylation 450"
                               , legacy = F )
 
+GDC = paste0(dir,"/GDCdata")
+dir.create(GDC, recursive = T)
+
 GDCdownload(query_met.hg38, directory=GDC)
 
 if(format!="none"){
