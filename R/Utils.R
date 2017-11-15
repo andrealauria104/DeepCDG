@@ -1,6 +1,6 @@
 # Utils for GDC data download and preparation 
 
-# 0.1 Args Parsing ====
+# 1. Args Parsing ====
 args <- commandArgs(trailingOnly = T)
 
 parserr <- 'Incorrect argument parsing. Please specify: \n
@@ -28,13 +28,14 @@ dir2 = basename(dir)
 dir = paste0(dir1,"/",dir2)
 rm(list=c("dir1","dir2"))
 
-# 0.2 Resources ====
+# 2. Resources ====
 
 library(TCGAbiolinks)
 library(SummarizedExperiment)
 library(reshape2)
 library(biomaRt)
-# 1.0 Functions ====
+
+# 3. Functions ====
 
 store <- function(format, dir, data, cancer_type, data_category) {
   both = F
