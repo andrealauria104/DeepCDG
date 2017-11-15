@@ -1,6 +1,6 @@
 # R script to download and prepare mutation data (MAF) using TCGAbiolinks
-
-source("R/Utils.R")
+DeepCDG = "/sto1/andrea/DeepCDG"
+source(paste0(DeepCDG,"/R/Utils.R"))
 
 # 1.0 Download MAF - 4 different pipelines ====
 if(format=='none'){
