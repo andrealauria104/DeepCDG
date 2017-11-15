@@ -12,12 +12,14 @@ dir.create(GDC, recursive = T)
 
 ct = sapply(strsplit(cancer_type, "[[:punct:]]"), "[[", 2)
 
+# Download from GDC 
 muse.maf <- GDCquery_Maf(ct, pipelines = "muse", directory=GDC)
 varscan2.maf <- GDCquery_Maf(ct, pipelines = "varscan2", directory=GDC)
 somaticsniper.maf <- GDCquery_Maf(ct, pipelines = "somaticsniper", directory=GDC)
 mutect.maf <- GDCquery_Maf(ct, pipelines = "mutect", directory=GDC)
 
+# Save files
 datas = ls()[grep("maf", ls())]
 for(i in datas){
-  store(format = "both", dir = dir, cancer_type = cancer_type, data = get(i), data_category = i)  
+  store(format = format, dir = dir, cancer_type = cancer_type, data = get(i), data_category = i)  
 }

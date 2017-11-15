@@ -33,7 +33,7 @@ rm(list=c("dir1","dir2"))
 library(TCGAbiolinks)
 library(SummarizedExperiment)
 library(reshape2)
-
+library(biomaRt)
 # 1.0 Functions ====
 
 store <- function(format, dir, data, cancer_type, data_category) {
