@@ -19,5 +19,5 @@ mutect.maf <- GDCquery_Maf(ct, pipelines = "mutect", directory=GDC)
 
 datas = ls()[grep("maf", ls())]
 for(i in datas){
-  store(format = "both", dir = dir, cancer_type = cancer_type, data = get(i), data_category = "MAF")  
+  store(format = "both", dir = dir, cancer_type = cancer_type, data = get(i), data_category = i)  
 }
