@@ -24,7 +24,7 @@ cancer_type = as.character(args[1])
 my.norm = as.character(args[2])
 dir = as.character(args[3])
 
-if(length(args)<3){
+if(length(args)<4){
   format = 'none'
 } else{
   format = as.character(args[4])
