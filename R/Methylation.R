@@ -49,8 +49,9 @@ GDCdownload(query_met.hg38, directory=GDC)
 if(format!="none"){
   # 1.1 Prepare Data
   met.hg38 <- GDCprepare(query_met.hg38, directory=GDC)
+  met <- assay(met.hg38)
   # 1.2 Save Data
-  store(format = format, dir = dir, cancer_type = cancer_type, data = met.hg38, data_category = "Methylation")  
+  store(format = format, dir = dir, cancer_type = cancer_type, data = met, data_category = "Methylation")  
 }
 
 
