@@ -39,7 +39,7 @@ setwd("DownloadEnv")
 GDC = paste0(dir,"/GDCdata")
 dir.create(GDC, recursive = T)
 
-# Include germiline mutations
+# Include germline mutations
 query.cnv_hg38 <- GDCquery(project = cancer_type
                         , data.category = "Copy Number Variation"
                         , data.type = "Copy Number Segment"
@@ -47,7 +47,7 @@ query.cnv_hg38 <- GDCquery(project = cancer_type
                   
 GDCdownload(query.cnv_hg38, directory = GDC)
 
-# Mask germiline mutations
+# Mask germline mutations
 query.cnv.mask_hg38 <- GDCquery(project = cancer_type
                            , data.category = "Copy Number Variation"
                            , data.type = "Masked Copy Number Segment"
