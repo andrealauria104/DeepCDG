@@ -36,10 +36,6 @@ if(!dir.exists("DownloadEnv")){
 setwd("DownloadEnv")
 
 # 1.0 Download MAF - 4 different pipelines ====
-if(format=='none'){
-  stop(message("Please specify data format for storing prepared data."))
-}
-
 GDC = paste0(dir,"/GDCdata")
 dir.create(GDC, recursive = T)
 
