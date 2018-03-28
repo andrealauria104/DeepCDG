@@ -27,7 +27,12 @@ cnv$X <- NULL
 colnames(cnv)[1] <- "Barcode"
 cnv$sample <- table.code[substr(cnv$Barcode, 14,15)]
 
-cnv <- subset(cnv, sample=="TP")
+if ( project != "TCGA-LAML") {
+  cnv <- subset(cnv, sample=="TP")  
+} else {
+  cnv <- subset(cnv, sample=="TB")  
+}
+
 cnv <- subset(cnv, abs(Segment_Mean)>0.3 & Segment_Mean<1.5)
 
 cnv$assignedCNV <- ifelse(cnv$Segment_Mean>0.3, "Gain","Loss")
