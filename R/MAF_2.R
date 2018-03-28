@@ -52,7 +52,11 @@ somaticsniper.maf <- GDCquery_Maf(ct, pipelines = "somaticsniper", directory=GDC
 mutect.maf <- GDCquery_Maf(ct, pipelines = "mutect", directory=GDC)
 
 # Save files
-datas = ls()[grep("maf", ls())]
-for(i in datas){
-  store(format = format, dir = dir, cancer_type = cancer_type, data = get(i), data_category = i)  
+if ( format != 'none'){
+  
+  datas = ls()[grep("maf", ls())]
+  for(i in datas){
+    store(format = format, dir = dir, cancer_type = cancer_type, data = get(i), data_category = i)  
+  }
+  
 }
