@@ -70,6 +70,9 @@ cnv_genes <- ddply(df, .(geneId), mutate,
                    Gain      = table(assignedCNV)["Gain"],
                    Loss      = table(assignedCNV)["Loss"]
 )
+cnv_genes$Gain[which(is.na(cnv_genes$Gain))] <- 0
+cnv_genes$Loss[which(is.na(cnv_genes$Loss))] <- 0
+
 nsamples <- length(unique(cnv_genes$Barcode))
 cnv_genes <- ddply(cnv_genes, .(geneId), mutate,
                    totCNV = Gain + Loss,
@@ -82,12 +85,17 @@ cnv_samples <- ddply(df, .(Barcode), mutate,
                      Gain      = table(assignedCNV)["Gain"],
                      Loss      = table(assignedCNV)["Loss"]
 )
+cnv_samples$Gain[which(is.na(cnv_samples$Gain))] <- 0
+cnv_samples$Loss[which(is.na(cnv_samples$Loss))] <- 0
+
 cnv_samples <- ddply(cnv_samples, .(Barcode), mutate,
                      totCNV = Gain + Loss
 )
+n_genes <- length(unique(gene_ids$geneId))
 cnv_samples <- ddply(cnv_samples, .(Barcode), mutate,
-                     freqGain = Gain/totCNV,
-                     freqLoss = Loss/totCNV)
+                     freqGain = Gain/n_genes,
+                     freqLoss = Loss/n_genes,
+                     freqCNV  = totCNV/n_genes) 
 
 # 5. Save files ====
 cat("Saving files ...\n")
